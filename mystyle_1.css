@@ -1,0 +1,52 @@
+.link 
+{
+    color: black;
+    text-decoration-line: none;
+}
+
+a
+{
+    color: black;
+    text-decoration-line: none;
+}
+
+.pictures img
+{
+    outline: black;
+    outline-style: groove;
+    outline-width: 2px;
+    outline-color: rgb(0, 0, 0);
+}
+
+header 
+{
+
+    width: 100%;
+    background: #666;
+    height: 70px;
+}
+
+footer 
+{
+    bottom:0;
+    width: 100%;
+    background: #666;
+    height: 70px;
+}
+
+.outline 
+{
+    outline-style: outset;
+    outline-width: 3px;
+    outline-color: rgb(0, 0, 0);
+    outline-offset: 10px;
+  }
+
+.photo {
+    padding: 20px; /* Поля вокруг изображения */
+    margin-right: 10px; /* Отступ справа */
+    margin-bottom: 10px; /* Отступ снизу */
+    outline: 1px solid #666; /* Параметры рамки */
+    background: #f0f0f0; /* Цвет фона */
+    float: left; /* Обтекание по правому краю */
+}
