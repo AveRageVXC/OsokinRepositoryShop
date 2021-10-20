@@ -18,20 +18,42 @@ a
     outline-color: rgb(0, 0, 0);
 }
 
+.color_black
+{
+    color:rgb(0, 0, 0)
+}
+
 header 
 {
 
     width: 100%;
-    background: rgb(0, 0, 0);
-    height: 70px;
+    background: rgb(156, 156, 175);/*#666;*/
+    height: 40px;
+}
+
+.container
+{
+    float: center;
+    width: 100%;
+    /*height: 88%;*/
 }
 
 footer 
 {
     bottom:0;
     width: 100%;
-    background: #666;
+    background: rgb(156, 156, 175);/*#666;*/
     height: 70px;
+}
+
+.align_right
+{
+    float: right;
+}
+
+.align_center
+{
+    float: center;
 }
 
 .outline 
