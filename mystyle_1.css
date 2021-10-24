@@ -4,6 +4,11 @@
     text-decoration-line: none;
 }
 
+.main {
+    min-height: 50vh;
+    height: 89%
+}
+
 a
 {
     color: black;
@@ -28,7 +33,12 @@ header
 
     width: 100%;
     background: rgb(156, 156, 175);/*#666;*/
-    height: 40px;
+    height: 5%;
+    min-height: 4vh;
+}
+
+ul {
+    list-style-type: none;
 }
 
 .container
@@ -43,7 +53,8 @@ footer
     bottom:0;
     width: 100%;
     background: rgb(156, 156, 175);/*#666;*/
-    height: 70px;
+    height: 6%;
+    min-height: 5vh;
 }
 
 .align_right
