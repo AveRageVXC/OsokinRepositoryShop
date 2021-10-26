@@ -67,6 +67,13 @@ footer
     float: center;
 }
 
+@media screen and (max-width: 900px) {
+    body {
+    background-color: #333333cc;
+    color: #ffffff;
+    }
+}
+
 .outline 
 {
     outline-style: outset;
