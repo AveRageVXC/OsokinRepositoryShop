@@ -1,0 +1,1 @@
+UPDATE users SET date_of_registration = substr(date_of_registration, 1, 4) || '-' || substr(date_of_registration, 6, 2) || '-' || substr(date_of_registration, 9, 2);
