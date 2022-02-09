@@ -75,6 +75,6 @@ class TestTesting(unittest.TestCase):
                 '''.format(user_id)
             )
         self.assertEqual(str(self.cursor.fetchall()), "[(1, 1, 3)]")
-        
+
 if __name__ == '__main__':
     unittest.main(failfast=False)
