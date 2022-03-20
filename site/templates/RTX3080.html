@@ -1,20 +1,12 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
-        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
-        <title>RTX 3080</title>
-    </head>
-    <header>
-        <img src={{ url_for('static', filename="Logo2.png") }}>
-        <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
-    </header>
+{% extends "base.html" %}
+
+{% block content %}
     <div class="main">
         <body>
             <h1><strong>RTX3080</strong></h1>
             <div class = "row">
                 <div class = "col-md-auto">
-                    <img class = "pictures" src="https://img2.wtftime.ru/store/2020/06/07/9f79ULCb.jpg" width="320" height="200">
+                    <img class = "pictures" src={{ url_for('static', filename='3080.jpg') }} width="320" height="200">
                 </div>
                 <div class = "col sm">
                     <a>Лучшее решение для геймеров</a><br>
@@ -71,10 +63,4 @@
             </table>
         </body>
     </div>
-    <footer>
-        <div align="center">
-            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
-        </div>
-    </footer>
-</html>
+{% endblock %}

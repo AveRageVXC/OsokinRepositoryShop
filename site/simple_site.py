@@ -1,6 +1,30 @@
 from flask import *
+from flask_sqlalchemy import SQLAlchemy
+from ORM import Videocards
+
 
 app = Flask(__name__)
+
+# class Videocards():
+#     def init(self, name, core, techprocess, transistors, core_clock, shaders_clock, shaders, memory_bus, interface, energousage, date, picture_url):
+#         self.name = name
+#         self.core = core
+#         self.techprocess = techprocess
+#         self.transistors = transistors
+#         self.core_clock = core_clock
+#         self.shaders_clock = shaders_clock
+#         self.shaders = shaders
+#         self.memory_bus = memory_bus
+#         self.interface = interface
+#         self.energousage = energousage
+#         self.date = date
+#         self.picture_url = picture_url
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///NewDB.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
 
 @app.route('/')
 def setup():
@@ -15,7 +39,8 @@ def about_us():
     return render_template('about_us.html')
 
 @app.route('/catalog')
-def catalog():
+def catalog(items):
+    d = list(Videocards.query.all())
     return render_template('catalog.html')
 
 @app.route('/feedback')
@@ -36,4 +61,5 @@ def RTX3090():
 
 
 if __name__ == '__main__':
+    print(list(Videocards.query.all())[0])
     app.run(debug=True)

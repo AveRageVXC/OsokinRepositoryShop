@@ -1,22 +1,8 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{% extends "base.html" %}
 
-        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
-        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
-        <title>Главная  </title>
-        
-        <style>
-            .text 
-            {
-                text-align:  center;
-            }
-        </style>
-    </head>
-    <header>
-        <img src={{ url_for('static', filename="Logo2.png") }}>
-        <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
-    </header>
+
+
+{% block content %}
     <body>
         <div class="main">
             <div class = "container" align="center">
@@ -25,11 +11,5 @@
                 <img src="https://becompact.ru/upload/iblock/7a0/7a0a4affabdc6b51b929836e2feeac43.png" width="300" height="200">
             </div>
         </div>
-    <footer>
-        <div align="center">
-            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
-        </div>
-    </footer>
     </body>
-</html>
+{% endblock %}

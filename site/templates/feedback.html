@@ -1,15 +1,7 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
-        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
-        <title>Отзыв</title>
-    </head>
-    <header>
-        <img src={{ url_for('static', filename="Logo2.png") }}>
-        <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
-    </header>
-    <body><!---->
+{% extends "base.html" %}
+
+{% block content %}
+    <body>
         <div class="text main">
             <form action="URL">
                 <fieldset>
@@ -23,10 +15,4 @@
             </form>
         </div>
     </body>
-    <footer>
-        <div align="center">
-            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
-        </div>
-    </footer>
-</html>
+{% endblock %}

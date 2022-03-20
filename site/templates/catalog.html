@@ -1,44 +1,42 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
-        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
-        <title>Каталог</title>
-        <!-- <style>
-            .text 
-            {
-                text-align:  center;
-            }
-        </style> -->
-    </head>
+{% extends "base.html" %}
+
+{% block header %}
     <header>
         <img src={{ url_for('static', filename="Logo2.png") }}>
         <a class="btn btn-outline-* align_right" href="/code" role="button">Главная</a>
     </header>
-    <body>
+{% endblock %}
 
+{% block content %}
+    <body>
         <div class="main">
             <div class="row text-center">
                 <div class="col text-center">
-                    <ul>
-                        <li>
-                            <h2>RTX3070</h2>
-                        </li>
-                        <li>
-                            <img src="https://cdn.staticneo.com/a/msi-geforce-rtx-3070-gaming-x-trio/08.jpg" width=650 height=400 class="py-3">
-                        </li>
-                        <li>
-                            <a href="/RTX3070" class="btn btn-outline-dark py-3">Перейти</a>
-                        </li>
-                    </ul>
+                    {% for item in items %}
+                            <ul>
+                                <li>
+                                    <h2>{{item.name}}</h2>
+                                </li>
+                                <li>
+                                    <img src={{item.picture_url}} width=650 height=400 class="py-3">
+                                </li>
+                                <li>
+                                    <a href={{item.href}} class="btn btn-outline-dark py-3">Перейти</a>
+                                </li>
+                            </ul>
+
+                    {% endfor %}
                 </div>
+
+
+
                 <div class="col text-center">
                     <ul>
                         <li>
                             <h2>RTX3080</h2>
                         </li>
                         <li>
-                            <img src="https://img2.wtftime.ru/store/2020/06/07/9f79ULCb.jpg" width=650 height=400 class="py-3">
+                            <img src={{ url_for('static', filename='3080.jpg') }} width=650 height=400 class="py-3">
                         </li>
                         <li>
                             <a href="/RTX3080" class="btn btn-outline-dark py-3" >Перейти</a>
@@ -51,7 +49,7 @@
                             <h2>RTX3090</h2>
                         </li>
                         <li>
-                            <img src="https://c.dns-shop.ru/thumb/st4/fit/760/600/caf3c561fba1997b5ca3b82ea88bdcb9/q93_70a17756c8add0704177f43a0abe5572c74d7af7f81ff0ea2d33ba8d13480309.jpg" width=650 height=400 class="py-3">
+                            <img src={{ url_for('static', filename='3090.jpg') }} width=650 height=400 class="py-3">
                         </li>
                         <li>
                             <a href="/RTX3090" class="btn btn-outline-dark py-3" >Перейти</a>
@@ -61,10 +59,4 @@
             </div>
         </div>
     </body>
-    <footer>
-        <div align="center">
-            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
-        </div>
-    </footer>
-</html>
+{% endblock %}

@@ -1,21 +1,13 @@
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
-        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
-        <title>RTX 3090</title>
-    </head>
-    <header>
-        <img src={{ url_for('static', filename="Logo2.png") }}>
-        <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
-    </header>
+{% extends "base.html" %}
+
+{% block content %}
     <div class="main">
         <body>
             <h1><strong>RTX3090</strong></h1>
             
             <div class="row">
                 <div class="col-md-auto">
-                    <img src="https://c.dns-shop.ru/thumb/st4/fit/760/600/caf3c561fba1997b5ca3b82ea88bdcb9/q93_70a17756c8add0704177f43a0abe5572c74d7af7f81ff0ea2d33ba8d13480309.jpg" alt= "" width="350" height="200">
+                    <img src={{ url_for('static', filename='3090.jpg') }} alt= "" width="350" height="200">
                 </div>
                 <div class="col sm">
                     <ul>
@@ -84,10 +76,4 @@
             </table>
         </body>
     </div>
-    <footer>
-        <div align="center">
-            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
-        </div>
-    </footer>
-</html>
+{% endblock %}
