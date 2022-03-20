@@ -1,8 +1,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="mystyle_1.css">
+        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
+        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
         <title>Каталог</title>
         <!-- <style>
             .text 
@@ -12,8 +12,8 @@
         </style> -->
     </head>
     <header>
-        <img src="Logo2.png">   
-        <a class="btn btn-outline-* align_right" href="catalog.html" role="button">Каталог</a>
+        <img src={{ url_for('static', filename="Logo2.png") }}>
+        <a class="btn btn-outline-* align_right" href="/code" role="button">Главная</a>
     </header>
     <body>
 
@@ -28,7 +28,7 @@
                             <img src="https://cdn.staticneo.com/a/msi-geforce-rtx-3070-gaming-x-trio/08.jpg" width=650 height=400 class="py-3">
                         </li>
                         <li>
-                            <a href="RTX3070.html" class="btn btn-outline-dark py-3">Перейти</a>
+                            <a href="/RTX3070" class="btn btn-outline-dark py-3">Перейти</a>
                         </li>
                     </ul>
                 </div>
@@ -41,7 +41,7 @@
                             <img src="https://img2.wtftime.ru/store/2020/06/07/9f79ULCb.jpg" width=650 height=400 class="py-3">
                         </li>
                         <li>
-                            <a href="RTX3080.html" class="btn btn-outline-dark py-3" >Перейти</a>
+                            <a href="/RTX3080" class="btn btn-outline-dark py-3" >Перейти</a>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +54,7 @@
                             <img src="https://c.dns-shop.ru/thumb/st4/fit/760/600/caf3c561fba1997b5ca3b82ea88bdcb9/q93_70a17756c8add0704177f43a0abe5572c74d7af7f81ff0ea2d33ba8d13480309.jpg" width=650 height=400 class="py-3">
                         </li>
                         <li>
-                            <a href="RTX3090.html" class="btn btn-outline-dark py-3" >Перейти</a>
+                            <a href="/RTX3090" class="btn btn-outline-dark py-3" >Перейти</a>
                         </li>
                     </ul>
                 </div>
@@ -63,8 +63,8 @@
     </body>
     <footer>
         <div align="center">
-            <a class="btn btn-outline-*" href="about_us.html" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="feedback.html" role="button">Отзыв</a>
+            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
+            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
         </div>
     </footer>
 </html>

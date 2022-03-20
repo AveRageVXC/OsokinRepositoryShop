@@ -1,24 +1,23 @@
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="mystyle_1.css">
-        <title>RTX 3070</title>
+        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
+        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
+        <title>RTX 3080</title>
     </head>
     <header>
-        <img src="Logo2.png">   
-        <a class="btn btn-outline-* align_right" href="catalog.html" role="button">Каталог</a>
+        <img src={{ url_for('static', filename="Logo2.png") }}>
+        <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
     </header>
     <div class="main">
-        <body>  
-            <h1><strong>RTX3070</strong></h1>
+        <body>
+            <h1><strong>RTX3080</strong></h1>
             <div class = "row">
                 <div class = "col-md-auto">
-                    <img class = "pictures" src="https://cdn.staticneo.com/a/msi-geforce-rtx-3070-gaming-x-trio/08.jpg" width="320" height="200">
+                    <img class = "pictures" src="https://img2.wtftime.ru/store/2020/06/07/9f79ULCb.jpg" width="320" height="200">
                 </div>
                 <div class = "col sm">
-                    <a>Решение среднего класса для тех, кто недостаточно богат</a><br>
+                    <a>Лучшее решение для геймеров</a><br>
                     <a class="btn btn-light" href="" role="button">Купить</a>
                 </div>
             </div>
@@ -26,12 +25,12 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Наименование</th>
-                        <th>GeForce RTX 3070</th>
+                        <th>GeForce RTX 3080</th>
                     </tr>
                 </thead>
                 <tr>
                     <th>Ядро</th>
-                    <td>	GA104</td>
+                    <td>GA102</td>
                 </tr>
                 <tr>
                     <th>Техпроцесс, нм</th>
@@ -39,23 +38,23 @@
                 </tr>
                 <tr>
                     <th>Транзисторов, млн</th>
-                    <td>17400</td>
+                    <td>28300</td>
                 </tr>
                 <tr>
                     <th>Частота работы ядра, МГц</th>
-                    <td>1500–1725</td>
+                    <td>1440–1710</td>
                 </tr>
                 <tr>
                     <th>Частота работы шейдерных блоков, МГц</th>
-                    <td>1500–1725</td>
+                    <td>1440–1710</td>
                 </tr>
                 <tr>
                     <th>Шейдерных блоков</th>
-                    <td>5888</td>
+                    <td>8704</td>
                 </tr>
                 <tr>
                     <th>Шина памяти</th>
-                    <td>256-bit</td>
+                    <td>320-bit</td>
                 </tr>
                 <tr>
                     <th>Интерфейс</th>
@@ -63,19 +62,19 @@
                 </tr>
                 <tr>
                     <th>Энергопотребление, Вт</th>
-                    <td>220</td>
+                    <td>320</td>
                 </tr>
                 <tr>
                     <th>Дата выпуска</th>
-                    <td>15.10.2020</td>
+                    <td>17.04.2020</td>
                 </tr>
             </table>
         </body>
     </div>
     <footer>
         <div align="center">
-            <a class="btn btn-outline-*" href="about_us.html" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="feedback.html" role="button">Отзыв</a>
+            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
+            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
         </div>
     </footer>
 </html>
