@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-        <link rel="stylesheet" href={{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}>
-        <link rel="stylesheet" href={{ url_for('static', filename='mystyle_1.css') }}>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='mystyle_1.css') }}">
         <title>Главная</title>
 
         <style>
@@ -16,20 +15,35 @@
         </style>
     </head>
 
-{% block header %}
-    <header>
-        <img src={{ url_for('static', filename="Logo2.png") }}>
-        <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
-    </header>
-{% endblock %}
-    {% block content %}
-    {% endblock %}
-{% block footer %}
-    <footer>
-        <div align="center">
-            <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
-            <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
+    <body>
+        <header>
+            
+            <img src="{{ url_for('static', filename='Logo2.png') }}">
+            <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
+            {% if session.login %}
+                <a class="btn btn-outline-* align_right" href="/{{session.login}}" role="button">{{session.login}}</a>
+                <a class="btn btn-outline-* align_right" href="/logout" role="button">Выйти</a>
+            {% else %}
+                <a class="btn btn-outline-* align_right" href="/login" role="button">Войти</a>
+            {% endif%}
+        </header>
+        
+        <div class="container">
+            {% for category, mesg in get_flashed_messages(with_categories=true) %}
+                {% if category == 'warning' %}
+                    <h6 class="text-center" style="color: red;">{{ mesg }}</h1>
+                {% else %}
+                    <h6 class="text-center" style="color: green;">{{ mesg }}</h1>
+                {% endif %}
+            {% endfor %}    
         </div>
-    </footer>
-{% endblock %}
+        {% block content %}
+        {% endblock %}
+        <footer>
+            <div align="center">
+                <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
+                <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
+            </div>
+        </footer>
+    </body>
 </html>

@@ -2,14 +2,14 @@
 
 {% block content %}
     <div class="main">
-        <body>
-            <h1><strong>RTX3080</strong></h1>
+        <body>  
+            <h1><strong>{{item.name}}</strong></h1>
             <div class = "row">
                 <div class = "col-md-auto">
-                    <img class = "pictures" src={{ url_for('static', filename='3080.jpg') }} width="320" height="200">
+                    <img class = "pictures" src="{{ url_for('static', filename='3070.jpg') }}" width="320" height="200">
                 </div>
                 <div class = "col sm">
-                    <a>Лучшее решение для геймеров</a><br>
+                    {{item.quantity}}
                     <a class="btn btn-light" href="" role="button">Купить</a>
                 </div>
             </div>
@@ -17,48 +17,48 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Наименование</th>
-                        <th>GeForce RTX 3080</th>
+                        <th>{{item.name}}</th>
                     </tr>
                 </thead>
                 <tr>
                     <th>Ядро</th>
-                    <td>GA102</td>
+                    <td>{{item.core}}</td>
                 </tr>
                 <tr>
                     <th>Техпроцесс, нм</th>
-                    <td>8</td>
+                    <td>{{item.techprocess}}</td>
                 </tr>
                 <tr>
                     <th>Транзисторов, млн</th>
-                    <td>28300</td>
+                    <td>{{item.transistors}}</td>
                 </tr>
                 <tr>
                     <th>Частота работы ядра, МГц</th>
-                    <td>1440–1710</td>
+                    <td>{{item.core_clock}}</td>
                 </tr>
                 <tr>
                     <th>Частота работы шейдерных блоков, МГц</th>
-                    <td>1440–1710</td>
+                    <td>{{item.shaders_clock}}</td>
                 </tr>
                 <tr>
                     <th>Шейдерных блоков</th>
-                    <td>8704</td>
+                    <td>{{item.shaders}}</td>
                 </tr>
                 <tr>
                     <th>Шина памяти</th>
-                    <td>320-bit</td>
+                    <td>{{item.memory_bus}}</td>
                 </tr>
                 <tr>
                     <th>Интерфейс</th>
-                    <td>PCI-E 4.0</td>
+                    <td>{{item.interface}}</td>
                 </tr>
                 <tr>
                     <th>Энергопотребление, Вт</th>
-                    <td>320</td>
+                    <td>{{item.energousage}}</td>
                 </tr>
                 <tr>
                     <th>Дата выпуска</th>
-                    <td>17.04.2020</td>
+                    <td>{{item.date}}</td>
                 </tr>
             </table>
         </body>
