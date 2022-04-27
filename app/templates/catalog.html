@@ -13,48 +13,18 @@
             <div class="row text-center">
                 <div class="col text-center">
                     {% for item in items %}
-                            <ul>
-                                <li>
-                                    <h2>{{item.name}}</h2>
-                                </li>
-                                <li>
-                                    <img src={{item.picture_url}} width=650 height=400 class="py-3">
-                                </li>
-                                <li>
-                                    <a href={{item.href}} class="btn btn-outline-dark py-3">Перейти</a>
-                                </li>
-                            </ul>
-
+                        <ul>
+                            <li>
+                                <h2>{{item.name}}</h2>
+                            </li>
+                            <li>
+                                <img src="{{ url_for('static', filename=item.picture_url) }}" width=650 height=400 class="py-3">
+                            </li>
+                            <li>
+                                <a href=items/{{item.name}} class="btn btn-outline-dark py-3">Перейти</a>
+                            </li>
+                        </ul>
                     {% endfor %}
-                </div>
-
-
-
-                <div class="col text-center">
-                    <ul>
-                        <li>
-                            <h2>RTX3080</h2>
-                        </li>
-                        <li>
-                            <img src={{ url_for('static', filename='3080.jpg') }} width=650 height=400 class="py-3">
-                        </li>
-                        <li>
-                            <a href="/RTX3080" class="btn btn-outline-dark py-3" >Перейти</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col text-center">
-                    <ul>
-                        <li>
-                            <h2>RTX3090</h2>
-                        </li>
-                        <li>
-                            <img src={{ url_for('static', filename='3090.jpg') }} width=650 height=400 class="py-3">
-                        </li>
-                        <li>
-                            <a href="/RTX3090" class="btn btn-outline-dark py-3" >Перейти</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

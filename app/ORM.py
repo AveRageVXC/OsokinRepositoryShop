@@ -3,12 +3,9 @@ import hashlib, datetime, os
 
 class Users(db.Model):
     id = db.Column(db.Integer, autoincrement = True, primary_key = True, nullable = False)
-    name = db.Column(db.String(100), nullable = False)
-    surname = db.Column(db.String(100), nullable = False)
-    login = db.Column(db.String(100), nullable = False, unique = True)
+    name = db.Column(db.String(100), nullable = False, unique=True)
     password = db.Column(db.String(30), nullable = False)
-    telephone = db.Column(db.String(15), nullable = False, unique = True)
-    date_of_registration = db.Column(db.String(10), nullable = False)
+    date_of_registration = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     birth_date = db.Column(db.String(10), nullable = False)
 
     def __repr__(self):
@@ -20,38 +17,21 @@ class Users(db.Model):
     def set_password(self, password):
         self.password = hashlib.md5(password.encode('utf8')).hexdigest()
 
-class Orders(db.Model):
-    id = db.Column(db.Integer, autoincrement = True, primary_key = True, nullable = False)
-    user_id = db.Column(db.Integer, nullable = False)
-    cost = db.Column(db.Integer, nullable = False)
-    provider = db.Column(db.String(100), nullable = False)
-    status = db.Column(db.String(100), nullable = False)
-
-    def __repr__(self):
-        return f'{self.id} {self.name}'
-
-class Products(db.Model):
-    id = db.Column(db.Integer, autoincrement = True, primary_key = True, nullable = False)
-    name = db.Column(db.String(100), nullable = False)
-    price = db.Column(db.Integer, nullable = False)
-    quantity = db.Column(db.Integer, nullable = False)
-
-    def __repr__(self):
-        return f'{self.id} {self.name}'
-
 class Products_In_Cart(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
-    products_id = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
-    order_id = db.Column(db.Integer)
+    product_name = db.Column(db.Integer, db.ForeignKey(Product.id), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    is_visible = db.Column(db.Boolean, default=True)
 
     def __repr__(self):
         return f'{self.id} {self.name}'
 
 class Videocards(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), unique=True)
     core = db.Column(db.String(100))
     techprocess = db.Column(db.Integer)
     transistors = db.Column(db.Integer)
@@ -68,6 +48,18 @@ class Videocards(db.Model):
 
     def __repr__(self):
         return f'{self.id} {self.name} {self.core} {self.techprocess} {self.transistors} {self.core_clock} {self.shaders_clock} {self.shaders} {self.memory_bus} {self.interface} {self.energousage} {self.date} {self.picture_url} {self.price} {self.quantity}'
+    
+    def inc_amount(self, amount):
+        self.quantity += amount
+    
+    def update_visibility(self):
+        self.is_visible = False
+
+class Reviews(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
+    text = db.Column(db.Text)
 
 def start_db():
     RTX3070 = Videocards(name = "RTX3070",
@@ -81,7 +73,7 @@ def start_db():
                         interface = "PCI-E 4.0",
                         energousage = 220,
                         date = "15.10.2020",
-                        picture_url = "{{ url_for('static', filename='3070.jpg') }}",
+                        picture_url = '3070.jpg',
                         price = 120000,
                         quantity = 4)
 
@@ -96,7 +88,7 @@ def start_db():
                         interface = "PCI-E 4.0",
                         energousage = 320,
                         date = "17.04.2020",
-                        picture_url = "{{ url_for('static', filename='3080.jpg') }}",
+                        picture_url = '3080.jpg',
                         price = 1900000,
                         quantity = 3)
 
@@ -110,7 +102,7 @@ def start_db():
                         interface = "PCI-E 4.0",
                         energousage = 350,
                         date = "24.09.2020",
-                        picture_url = "{{ url_for('static', filename='3090.jpg') }}",
+                        picture_url = '3090.jpg',
                         price = 270000,
                         quantity = 2)
 
@@ -121,3 +113,33 @@ def start_db():
 
 def create_db():
     db.create_all()
+
+def get_videocard_by_url(name):
+    return Videocards.query.filter(Product.url == name).one()
+
+def get_videocard_id_by_url(name):
+    return Videocards.query.filter(Product.url == name).one().id
+
+def get_videocards():
+    return Videocards.query.all()
+
+def get_reviews():  
+    return Reviews.query.all()
+
+def get_cart_for_user(user_id):
+    return CartItem.query.filter(User.id == user_id)
+
+def disable_cart_for_user(user_id):
+    cart = get_cart_for_user(user_id)
+    for cart_item in cart:
+        cart_item.update_visibility()
+        db.session.add(cart_item)
+    db.session.commit()
+
+def get_total_price_for_user(user_id):
+    cart = get_cart_for_user(user_id)
+    total_price = 0
+    for cart_item in cart:
+        if cart_item.is_visible:
+            total_price += cart_item.amount * cart_item.price
+    return total_price
