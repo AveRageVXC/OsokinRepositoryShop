@@ -6,7 +6,6 @@ class Users(db.Model):
     name = db.Column(db.String(100), nullable = False, unique=True)
     password = db.Column(db.String(30), nullable = False)
     date_of_registration = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    birth_date = db.Column(db.String(10), nullable = False)
 
     def __repr__(self):
         return f'{self.id} {self.name}'
@@ -16,18 +15,6 @@ class Users(db.Model):
 
     def set_password(self, password):
         self.password = hashlib.md5(password.encode('utf8')).hexdigest()
-
-class Products_In_Cart(db.Model):
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
-    user_id = db.Column(db.Integer, nullable=False)
-    quantity = db.Column(db.Integer, nullable=False)
-    product_name = db.Column(db.Integer, db.ForeignKey(Product.id), nullable=False)
-    price = db.Column(db.Integer, nullable=False)
-    date_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    is_visible = db.Column(db.Boolean, default=True)
-
-    def __repr__(self):
-        return f'{self.id} {self.name}'
 
 class Videocards(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
@@ -55,6 +42,18 @@ class Videocards(db.Model):
     def update_visibility(self):
         self.is_visible = False
 
+class Products_In_Cart(db.Model):
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    product_name = db.Column(db.Integer, db.ForeignKey(Videocards.id), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    is_visible = db.Column(db.Boolean, default=True)
+
+    def __repr__(self):
+        return f'{self.id} {self.name}'
+
 class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
@@ -75,7 +74,7 @@ def start_db():
                         date = "15.10.2020",
                         picture_url = '3070.jpg',
                         price = 120000,
-                        quantity = 4)
+                        quantity = 1000)
 
     RTX3080 = Videocards(name = "RTX3080",
                         core = "GA102",
@@ -90,7 +89,7 @@ def start_db():
                         date = "17.04.2020",
                         picture_url = '3080.jpg',
                         price = 1900000,
-                        quantity = 3)
+                        quantity = 100)
 
     RTX3090 = Videocards(name = "RTX3090", core = "GA102",
                         techprocess = 8,
@@ -104,7 +103,15 @@ def start_db():
                         date = "24.09.2020",
                         picture_url = '3090.jpg',
                         price = 270000,
-                        quantity = 2)
+                        quantity = 100)
+
+    if len(list(Users.query.all())) == 0:
+        dummy = Users(
+                    name='vlad',
+                    password=''
+                )
+        dummy.set_password('12345678')
+        db.session.add(dummy)   
 
     db.session.add(RTX3070)
     db.session.add(RTX3080)
@@ -115,10 +122,10 @@ def create_db():
     db.create_all()
 
 def get_videocard_by_url(name):
-    return Videocards.query.filter(Product.url == name).one()
+    return Videocards.query.filter(Videocards.name == name).one()
 
 def get_videocard_id_by_url(name):
-    return Videocards.query.filter(Product.url == name).one().id
+    return Videocards.query.filter(Videocards.name == name).one().id
 
 def get_videocards():
     return Videocards.query.all()
@@ -127,7 +134,7 @@ def get_reviews():
     return Reviews.query.all()
 
 def get_cart_for_user(user_id):
-    return CartItem.query.filter(User.id == user_id)
+    return Products_In_Cart.query.filter(Users.id == user_id)
 
 def disable_cart_for_user(user_id):
     cart = get_cart_for_user(user_id)
