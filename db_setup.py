@@ -1,4 +1,4 @@
-import app.ORM
+from app.ORM import *
 
-start_db()
 create_db()
+start_db()

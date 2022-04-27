@@ -14,9 +14,9 @@ def about_us():
     return render_template('about_us.html')
 
 @app.route('/catalog')
-def catalog(items):
-    d = list(Videocards.query.all())
-    return render_template('catalog.html')
+def catalog():
+    cards = Videocards.query.all()
+    return render_template('catalog.html', items=cards)
 
 @app.route('/feedback')
 def feedback():
