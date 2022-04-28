@@ -38,9 +38,11 @@ class Videocards(db.Model):
     
     def inc_amount(self, amount):
         self.quantity += amount
+
+    def dec_amount(self, amount):
+        self.quantity -= amount
     
-    def update_visibility(self):
-        self.is_visible = False
+    
 
 class Products_In_Cart(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)
@@ -53,6 +55,12 @@ class Products_In_Cart(db.Model):
 
     def __repr__(self):
         return f'{self.id} {self.name}'
+
+    def update_visibility(self):
+        self.is_visible = False
+    
+    def inc_amount(self, amount):
+        self.quantity += amount
 
 class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -104,6 +112,12 @@ def start_db():
                         picture_url = '3090.jpg',
                         price = 270000,
                         quantity = 100)
+    
+    feedback = Reviews(name='раян гослинг',
+        email='tayangosling@rayangosling.com',
+        text='купил 3 видеокарты в этом магазине. выбило пробки дома. ни о чем не жалею. 5 звезд.'
+    )
+    db.session.add(feedback)
 
     if len(list(Users.query.all())) == 0:
         dummy = Users(
@@ -148,5 +162,5 @@ def get_total_price_for_user(user_id):
     total_price = 0
     for cart_item in cart:
         if cart_item.is_visible:
-            total_price += cart_item.amount * cart_item.price
+            total_price += cart_item.quantity * cart_item.price
     return total_price

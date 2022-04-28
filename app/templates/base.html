@@ -17,8 +17,8 @@
 
     <body>
         <header>
-            
-            <img src="{{ url_for('static', filename='Logo2.png') }}">
+
+            <a class="btn btn-outline-* align_left" href="/code" role="button"><img src="{{ url_for('static', filename='Logo2.png') }}"></a>
             <a class="btn btn-outline-* align_right" href="/catalog" role="button">Каталог</a>
             {% if session.login %}
                 <a class="btn btn-outline-* align_right" href="/{{session.login}}" role="button">{{session.login}}</a>
@@ -42,7 +42,7 @@
         <footer>
             <div align="center">
                 <a class="btn btn-outline-*" href="/about_us" role="button">О нас</a>
-                <a class="btn btn-outline-*" href="/feedback" role="button">Отзыв</a>
+                <a class="btn btn-outline-*" href="/feedback" role="button">Отзывы</a>
             </div>
         </footer>
     </body>

@@ -15,24 +15,24 @@ def about_us():
     return render_template('about_us.html')
 
 @app.route('/items/<card>', methods=['GET', 'POST'])
-def render_coffee(card):
+def render_videocard(card):
     if request.method == 'POST':
         if session.get('login') is not None:
             user = Users.query.filter(Users.name==session.get('login')).one()
             product = get_videocard_by_url(card)
             if user:
                 quantity = request.form.get('quantity')
-                if get_product_by_url(card).amount >= int(quantity):
+                if get_videocard_by_url(card).quantity >= int(quantity):
                     cartitem = None
                     try:
-                        cartitem = Products_In_Cart.query.filter(sqlalchemy.and_(CartItem.product_name==product.name, CartItem.is_visible==True)).one()
+                        cartitem = Products_In_Cart.query.filter(sqlalchemy.and_(Products_In_Cart.product_name==product.name, Products_In_Cart.is_visible==True)).one()
                         cartitem.inc_amount(int(quantity))
                     except sqlalchemy.exc.NoResultFound:
                         cartitem = Products_In_Cart(
                             user_id=user.id,
                             product_name=product.name,
                             price=product.price,
-                            amount=quantity
+                            quantity=quantity
                         )
 
                     product.dec_amount(int(quantity))
@@ -80,10 +80,21 @@ def render_login():
             if Users.query.filter(Users.name == login).one().validate(password):
                 session["login"] = login
                 return redirect('/', code=301)
-            flash("Неправильный пароль", "warning")
+            flash("Неправильный логин или пароль", "warning")
         except sqlalchemy.exc.NoResultFound:
-            flash("Неправильный логин", "warning")
+            flash("Неправильный логин или пароль", "warning")
     return render_template('login.html')
+
+@app.route("/proceed_payment/<login>", methods=["POST", "GET"])
+def proceed_payment(login):
+    if session.get('login') == login:
+        user = Users.query.filter(Users.name == session.get('login')).one()
+        
+        disable_cart_for_user(user.id)
+    
+        flash('Спасибо за покупку!', 'success')   
+
+    return redirect('/catalog')
 
 @app.route("/logout")
 def render_logout():
@@ -97,8 +108,22 @@ def catalog():
     cards = Videocards.query.all()
     return render_template('catalog.html', items=cards)
 
-@app.route('/feedback')
+@app.route('/feedback', methods=["POST", "GET"])
 def feedback():
-    return render_template('feedback.html')
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        text = request.form.get("feedback")
+        print(name, email, text)
+        if name != "" and (email.index('@') < email.rfind('.')) and email.count('@') == 1 and text != "":
+            feedback = Reviews(name=name,
+                             email=email,
+                             text=text)
+            db.session.add(feedback)
+            db.session.commit()
+        else:
+            flash('Пожалуйста, проверьте правильность заполненных полей', 'warning')
+    feedback = Reviews.query.all()
+    return render_template('feedback.html', feedback=feedback)
 
 

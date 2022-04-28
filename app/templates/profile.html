@@ -5,11 +5,10 @@
         <div class="container">
             <form method="POST">
                 <h3 class="text-center">Сменить пароль</h3>
-                <input type="password" class="form-control" style="margin: 5px 0px 5px 0px" name="old_password" placeholder="Старый пароль">
-                <input type="password" class="form-control" style="margin: 5px 0px 5px 0px" name="new_password" placeholder="Новый пароль">
-                <div style="justify-content: center; display: flex; align-items: center; margin-top: 30px;">
-                    <button type="submit" class="btn login-button btn-outline-dark py-3">Сменить пароль</button>
-                </div>
+                <input type="password" class="form-control" name="old_password" placeholder="Старый пароль"><br>
+                <input type="password" class="form-control" name="new_password" placeholder="Новый пароль"><br>
+                <button type="submit">Сменить пароль</button>
+                
             </form>
         </div>
 
@@ -24,10 +23,10 @@
                                 <h4 class="text-center">{{ cart_item.product_name }}</h4>                        
                             </div>
                             <div class="col-sm">
-                                <h4 class="text-center">{{ cart_item.amount }} шт.</h4>
+                                <h4 class="text-center">{{ cart_item.quantity }} шт.</h4>
                             </div>
                             <div class="col-sm">
-                                <h4 class="text-center">{{ cart_item.amount * cart_item.price }} руб.</h4>
+                                <h4 class="text-center">{{ cart_item.quantity * cart_item.price }} руб.</h4>
                             </div>
                         </div>
                     </div>
@@ -38,12 +37,12 @@
         {% if total_price > 0 %}
             <h4 class="text-center" style="margin-top: 30px;">Общая цена: {{total_price}} руб.</h4>
             <div style="justify-content: center; display: flex; align-items: center; margin-top: 30px;">
-                <form method="POST" action="/buy/{{session.login}}">
+                <form method="POST" action="/proceed_payment/{{session.login}}">
                     <button type="submit" class="btn btn-outline-dark py-3">Купить</button>
                 </form>
             </div>
         {% else %}
-            <h4 class="text-center" style="margin-top: 30px;">Ваша корзина пуста :)</h4>
+            <h4 class="text-center" style="margin-top: 30px;">Ваша корзина пуста</h4>
         {% endif %}
     </div>
 {% endblock %}
