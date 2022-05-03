@@ -1,0 +1,1 @@
+from app.simple_site import *
